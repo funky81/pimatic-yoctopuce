@@ -1,0 +1,27 @@
+{ "name": "pimatic-plugin-template",
+  "description": "The plugin description",
+  "author": "Oliver Schneider <oliverschneider89+sweetpi@gmail.com> (http://sweetpi.de)",
+  "main": "my-plugin",
+  "files": [
+    "my-plugin.coffee",
+    "README.md",
+    "my-plugin-config-schema.coffee"
+  ],
+  "version": "0.8.0",
+  "homepage": "http://github.com/pimatic/pimatic",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/pimatic/pimatic-plugin-template.git"
+  },
+  "configSchema": "my-plugin-config-schema.coffee",
+  "dependencies": {
+  },
+  "peerDependencies": {
+    "pimatic": "0.8.*"
+  },
+  "engines": {
+    "node": ">0.8.x",
+    "npm": ">1.1.x"
+  }
+}
