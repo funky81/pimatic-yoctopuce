@@ -14,20 +14,20 @@ module.exports = (env) ->
   class YoctoMainRelayPlugin extends env.plugins.Plugin
 
     init: (app, @framework, @config) =>
+      yoctohub =  @config.YoctoHub  
       deviceConfigDef = require("./device-config-schema")
       @framework.deviceManager.registerDeviceClass("YoctoMainRelay",{
         configDef : deviceConfigDef.YoctoMainRelay,
-        createCallback : (config) => new YoctoMainRelay(config)
+        createCallback : (config) => new YoctoMainRelay(config,yoctohub)
       })
 
   class YoctoMainRelay extends env.devices.PowerSwitch
     # ####constructor()
      # Your constructor function must assign a name and id to the device.
-    constructor: (@config) ->
+    constructor: (@config,@yoctohub) ->
       @name = @config.name
       @id = @config.id
       @relayName = @id.replace('YoctoPowerRelay-','')
-      #env.logger.info @relayName
       super()
 
     # ####changeStateTo(state)
@@ -44,7 +44,7 @@ module.exports = (env) ->
       )
 
     changeStatus: (relayName) ->
-      YAPI.RegisterHub('http://192.168.1.205:4444/')
+      YAPI.RegisterHub(@yoctohub)
       relay  = YRelay.FindRelay(relayName)
       env.logger.info relay.get_state()
       env.logger.info YRelay.OUTPUT_ON
@@ -52,7 +52,7 @@ module.exports = (env) ->
       return Promise.resolve()
 
     getStatus: (relayName) ->
-      YAPI.RegisterHub('http://192.168.1.205:4444/')
+      YAPI.RegisterHub(@yoctohub)
       anyrelay  = YRelay.FirstRelay();  
       relay  = YRelay.FindRelay(relayName)
       #env.logger.info relay.get_module().get_serialNumber();
