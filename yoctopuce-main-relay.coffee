@@ -46,8 +46,8 @@ module.exports = (env) ->
     changeStatus: (relayName) ->
       YAPI.RegisterHub(@yoctohub)
       relay  = YRelay.FindRelay(relayName)
-      env.logger.info relay.get_state()
-      env.logger.info YRelay.OUTPUT_ON
+      #env.logger.info relay.get_state()
+      #env.logger.info YRelay.OUTPUT_ON
       if relay.get_state() then relay.set_output(YRelay.OUTPUT_OFF) else relay.set_output(YRelay.OUTPUT_ON)
       return Promise.resolve()
 
