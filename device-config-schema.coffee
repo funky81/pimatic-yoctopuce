@@ -6,9 +6,6 @@ module.exports = {
     title: "Plugin Propoeties"
     type: "object"
     extensions: ["xLink"]
-    properties:
-      message:
-          description: "Text to be displayed"
-          format: "string"    
+    properties: {} 
   }
 }
