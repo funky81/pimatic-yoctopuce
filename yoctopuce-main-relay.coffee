@@ -18,16 +18,20 @@ module.exports = (env) ->
       deviceConfigDef = require("./device-config-schema")
       @framework.deviceManager.registerDeviceClass("YoctoMainRelay",{
         configDef : deviceConfigDef.YoctoMainRelay,
-        createCallback : (config) => new YoctoMainRelay(config,yoctohub)
+        createCallback : (config,lastState) => new YoctoMainRelay(config,yoctohub,lastState)
       })
 
   class YoctoMainRelay extends env.devices.PowerSwitch
     # ####constructor()
      # Your constructor function must assign a name and id to the device.
-    constructor: (@config,@yoctohub) ->
+    constructor: (@config,@yoctohub,lastState) ->
       @name = @config.name
       @id = @config.id
       @relayName = @id.replace('YoctoPowerRelay-','')
+      @_state = lastState?.state?.value
+      Promise.resolve(()=>
+        this.changeStateTo(@_state)
+      )
       super()
 
     # ####changeStateTo(state)
