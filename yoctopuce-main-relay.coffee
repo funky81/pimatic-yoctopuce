@@ -29,6 +29,7 @@ module.exports = (env) ->
       @id = @config.id
       @relayName = @id.replace('YoctoPowerRelay-','')
       @_state = lastState?.state?.value
+      YAPI.RegisterHub(@yoctohub)
       Promise.resolve(()=>
         this.changeStateTo(@_state)
       )
@@ -48,7 +49,7 @@ module.exports = (env) ->
       )
 
     changeStatus: (relayName) ->
-      YAPI.RegisterHub(@yoctohub)
+      #YAPI.RegisterHub(@yoctohub)
       relay  = YRelay.FindRelay(relayName)
       #env.logger.info relay.get_state()
       #env.logger.info YRelay.OUTPUT_ON
@@ -56,7 +57,7 @@ module.exports = (env) ->
       return Promise.resolve()
 
     getStatus: (relayName) ->
-      YAPI.RegisterHub(@yoctohub)
+      #YAPI.RegisterHub(@yoctohub)
       anyrelay  = YRelay.FirstRelay();  
       relay  = YRelay.FindRelay(relayName)
       #env.logger.info relay.get_module().get_serialNumber();
