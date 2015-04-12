@@ -49,17 +49,18 @@ module.exports = (env) ->
       )
 
     changeStatus: (relayName) ->
-      #YAPI.RegisterHub(@yoctohub)
-      relay  = YRelay.FindRelay(relayName)
-      #env.logger.info relay.get_state()
-      #env.logger.info YRelay.OUTPUT_ON
-      if relay.get_state() then relay.set_output(YRelay.OUTPUT_OFF) else relay.set_output(YRelay.OUTPUT_ON)
-      return Promise.resolve()
+      return new Promise( (resolve) ->
+        YRelayAsync=Promise.promisify(YRelay)
+        relay  = YRelayAsync.FindRelay(relayName)
+        if relay.get_state() then resolve(relay.set_output(YRelay.OUTPUT_OFF)) else resolve(relay.set_output(YRelay.OUTPUT_ON))
+      )
+      
 
     getStatus: (relayName) ->
       #YAPI.RegisterHub(@yoctohub)
       #nyrelay  = YRelay.FirstRelay();  
-      relay  = YRelay.FindRelay(relayName)
+      YRelayAsync=Promise.promisify(YRelay)
+      relay  = YRelayAsync.FindRelay(relayName)
       #env.logger.info relay.get_module().get_serialNumber();
       #env.logger.info relay.get_state()
       #env.logger.info YRelay.FirstRelay()
