@@ -58,7 +58,7 @@ module.exports = (env) ->
 
     getStatus: (relayName) ->
       #YAPI.RegisterHub(@yoctohub)
-      anyrelay  = YRelay.FirstRelay();  
+      #nyrelay  = YRelay.FirstRelay();  
       relay  = YRelay.FindRelay(relayName)
       #env.logger.info relay.get_module().get_serialNumber();
       #env.logger.info relay.get_state()
