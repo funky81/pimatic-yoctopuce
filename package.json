@@ -1,15 +1,19 @@
 { "name": "pimatic-yoctopuce",
   "description": "This is plugin for yoctopuce - maxirelay devices",
-  "author": "Reski Rukmantiyo",
+  "author": {
+    "name": "Reski Rukmantiyo, Indonesia",
+    "email": "ayah@keluargareski.net",
+    "url": "http://github.com/funky81"
+  },
   "main": "yoctopuce-main-relay",
   "files": [
     "yoctopuce-main-relay.coffee",
     "README.md",
     "yoctopuce-main-relay-config-schema.coffee"
   ],
-  "version": "0.0.1",
+  "version": "1.0.0",
   "homepage": "http://github.com/funky81",
-  "private": true,
+  "private": false,
   "repository": {
     "type": "git",
     "url": "git://github.com/funky81/pimatic-yoctopuce.git"
@@ -18,7 +22,8 @@
   "dependencies": {
   },
   "peerDependencies": {
-    "pimatic": "0.8.*"
+    "pimatic": "0.8.*",
+    "yoctolib": "1.10.19938"
   },
   "engines": {
     "node": ">0.8.x",
