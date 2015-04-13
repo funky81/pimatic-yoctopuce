@@ -60,6 +60,7 @@ module.exports = (env) ->
     getStatus : (relayName) ->
       return new Promise ( (resolve,reject) ->
         relay  = YRelay.FindRelay(relayName)
+        relay.load(1,((ctx)->env.logger.info ctx))
         resolve(relay.get_state())
     )
 
