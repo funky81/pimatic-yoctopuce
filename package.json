@@ -11,7 +11,7 @@
     "README.md",
     "yoctopuce-main-relay-config-schema.coffee"
   ],
-  "version": "1.0.0",
+  "version": "1.0.1",
   "homepage": "http://github.com/funky81",
   "private": false,
   "repository": {
