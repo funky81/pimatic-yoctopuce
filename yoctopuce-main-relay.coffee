@@ -31,7 +31,7 @@ module.exports = (env) ->
       @_state = lastState?.state?.value
       YAPI.RegisterHub(@yoctohub)
       Promise.resolve(()=>
-        this.changeStateTo(@_state)
+        @changeStateTo(@_state)
       )
       super()
 
@@ -42,29 +42,26 @@ module.exports = (env) ->
       # If state is aleady set, just return a empty promise
       if @_state is state then return Promise.resolve()
       # else run the action and 
-      return this.changeStatus(@relayName).then( =>
+      return @changeStatus(@relayName).then( =>
         # and calls `PowerSwitch::_setState` so that `_state` is set and 
         # a event is emitted.
         @_setState(state)
       )
 
     changeStatus: (relayName) ->
-      return new Promise( (resolve) ->
-        YRelayAsync=Promise.promisify(YRelay)
-        relay  = YRelayAsync.FindRelay(relayName)
-        if relay.get_state() then resolve(relay.set_output(YRelay.OUTPUT_OFF)) else resolve(relay.set_output(YRelay.OUTPUT_ON))
+      @getStatus(relayName).then( (status)->
+        relay  = YRelay.FindRelay(relayName)
+        if status then relay.set_output(YRelay.OUTPUT_OFF) else relay.set_output(YRelay.OUTPUT_ON) 
+        Promise.resolve()
+      ).catch( (e)->
+        env.logger.info e
       )
-      
 
-    getStatus: (relayName) ->
-      #YAPI.RegisterHub(@yoctohub)
-      #nyrelay  = YRelay.FirstRelay();  
-      YRelayAsync=Promise.promisify(YRelay)
-      relay  = YRelayAsync.FindRelay(relayName)
-      #env.logger.info relay.get_module().get_serialNumber();
-      #env.logger.info relay.get_state()
-      #env.logger.info YRelay.FirstRelay()
-      return Promise.resolve(relay.get_state())
+    getStatus : (relayName) ->
+      return new Promise ( (resolve,reject) ->
+        relay  = YRelay.FindRelay(relayName)
+        resolve(relay.get_state())
+    )
 
     # ####getState()
     # Should return a promise with the state of the switch.
@@ -72,7 +69,7 @@ module.exports = (env) ->
       # If the state is cached then return it
       return if @_state? then Promise.resolve(@_state)
       # else et the state from somwhere
-      return this.getStatus(@relayName).then( (state) =>
+      return @getStatus(@relayName).then( (state) =>
         @_state = state
         # and return it.
         return @_state
