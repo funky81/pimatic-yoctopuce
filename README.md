@@ -25,5 +25,6 @@ Similiar like other device in Pimatic, you have to describe for below properties
     
 
 Note that :
-    ID should mention `YoctopowerRelay-` prefix while the rest of the ID will be your logical name in Yoctopuce MaxiPowerRelay. Name
+
+    ID should mention `YoctopowerRelay-` prefix while the rest of the ID will be your logical name in Yoctopuce MaxiPowerRelay.
     Name will be your label name in your Pimatic device
