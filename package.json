@@ -1,17 +1,14 @@
-{ "name": "pimatic-yoctopuce",
+{
+  "name": "pimatic-yoctopuce",
   "description": "This is plugin for yoctopuce - maxirelay devices",
-  "author": {
-    "name": "Reski Rukmantiyo, Indonesia",
-    "email": "ayah@keluargareski.net",
-    "url": "http://github.com/funky81"
-  },
+  "author": "Reski Rukmantiyo, Indonesia <ayah@keluargareski.net> (http://github.com/funky81)",
   "main": "yoctopuce-main-relay",
   "files": [
     "yoctopuce-main-relay.coffee",
     "README.md",
     "yoctopuce-main-relay-config-schema.coffee"
   ],
-  "version": "1.0.1",
+  "version": "1.0.2",
   "homepage": "http://github.com/funky81",
   "private": false,
   "repository": {
@@ -19,8 +16,7 @@
     "url": "git://github.com/funky81/pimatic-yoctopuce.git"
   },
   "configSchema": "yoctopuce-main-relay-config-schema.coffee",
-  "dependencies": {
-  },
+  "dependencies": {},
   "peerDependencies": {
     "pimatic": "0.8.*",
     "yoctolib": "1.10.19938"
@@ -28,5 +24,20 @@
   "engines": {
     "node": ">0.8.x",
     "npm": ">1.1.x"
-  }
+  },
+  "bugs": {
+    "url": "https://github.com/funky81/pimatic-yoctopuce/issues"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "pimatic",
+    "yoctopuce",
+    "yoctopuce maxipowerrelay",
+    "relay",
+    "home automation"
+  ],
+  "license": "GPL"
 }
