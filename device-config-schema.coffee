@@ -3,7 +3,7 @@
 module.exports = {
   title: "Yocto Main Relay"
   YoctoMainRelay :{
-    title: "Plugin Propoeties"
+    title: "Plugin Properties"
     type: "object"
     extensions: ["xLink"]
     properties: {} 
