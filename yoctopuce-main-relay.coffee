@@ -30,8 +30,8 @@ module.exports = (env) ->
       @relayName = @id.replace('YoctoPowerRelay-','')
       @_state = lastState?.state?.value
       YAPI.RegisterHub(@yoctohub)
-      Promise.resolve(()=>
-        @changeStateTo(@_state)
+      @initState().catch((e)->
+        env.logger.error e
       )
       super()
 
@@ -57,12 +57,36 @@ module.exports = (env) ->
         env.logger.info e
       )
 
+    changeStatusInto: (relayName,state) ->
+      return new Promise( (resolve,reject) ->
+        relay  = YRelay.FindRelay(relayName)
+        if state then relay.set_output(YRelay.OUTPUT_ON) else relay.set_output(YRelay.OUTPUT_OFF)
+        Promise.resolve()
+      ).catch( (e)->
+        env.logger.info e
+      )      
+
     getStatus : (relayName) ->
       return new Promise ( (resolve,reject) ->
         relay  = YRelay.FindRelay(relayName)
         relay.load(1,((ctx)->env.logger.info ctx))
         resolve(relay.get_state())
     )
+
+    # ####setState()
+    # Should return a promise with the state from the database
+    # At this point, switch should restore any differences between switch and db
+    # Switch will follow db's latest status
+    initState: () ->
+      # If the state is cached then return it
+      #return if @_state? then Promise.resolve(@_state)
+      # else et the state from somwhere
+      return @getStatus(@relayName).then( (state) =>
+        if @_state is not state then @changeStatusInto(@relayName,@_state)
+        #@_state = state
+        # and return it.
+        return @_state
+      )  
 
     # ####getState()
     # Should return a promise with the state of the switch.
