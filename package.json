@@ -6,9 +6,10 @@
   "files": [
     "yoctopuce-main-relay.coffee",
     "README.md",
-    "yoctopuce-main-relay-config-schema.coffee"
+    "yoctopuce-main-relay-config-schema.coffee",
+    "device-config-schema.coffee"
   ],
-  "version": "1.0.5",
+  "version": "1.0.6",
   "homepage": "http://github.com/funky81",
   "private": false,
   "repository": {
