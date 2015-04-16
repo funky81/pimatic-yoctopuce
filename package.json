@@ -9,7 +9,7 @@
     "yoctopuce-main-relay-config-schema.coffee",
     "device-config-schema.coffee"
   ],
-  "version": "1.0.6",
+  "version": "1.0.7",
   "homepage": "http://github.com/funky81",
   "private": false,
   "repository": {

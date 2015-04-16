@@ -61,7 +61,6 @@ module.exports = (env) ->
       return new Promise( (resolve,reject) ->
         relay  = YRelay.FindRelay(relayName)
         if state then relay.set_output(YRelay.OUTPUT_ON) else relay.set_output(YRelay.OUTPUT_OFF)
-        Promise.resolve()
       ).catch( (e)->
         env.logger.info e
       )      
@@ -73,19 +72,23 @@ module.exports = (env) ->
         resolve(relay.get_state())
     )
 
+    randomNum: (max,min=0) ->
+      return Math.floor(Math.random() * (max - min) + min)
+
     # ####setState()
     # Should return a promise with the state from the database
     # At this point, switch should restore any differences between switch and db
     # Switch will follow db's latest status
     initState: () ->
-      # If the state is cached then return it
-      #return if @_state? then Promise.resolve(@_state)
-      # else et the state from somwhere
       return @getStatus(@relayName).then( (state) =>
-        if @_state is not state then @changeStatusInto(@relayName,@_state)
-        #@_state = state
-        # and return it.
-        return @_state
+        if @_state is not state  
+          relay  = YRelay.FindRelay(@relayName)
+          setTimeout () =>
+            if @_state
+              relay.set_output(YRelay.OUTPUT_ON) 
+            else 
+              relay.set_output(YRelay.OUTPUT_OFF)
+          ,@randomNum(10)
       )  
 
     # ####getState()
