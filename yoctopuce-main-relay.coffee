@@ -39,7 +39,7 @@ module.exports = (env) ->
     # The `changeStateTo` function should change the state of the switch, when called by the 
     # framework.
     changeStateTo: (state) ->
-      # If state is aleady set, just return a empty promise
+      # If state is already set, just return a empty promise
       if @_state is state then return Promise.resolve()
       # else run the action and 
       return @changeStatus(@relayName).then( =>
@@ -96,7 +96,7 @@ module.exports = (env) ->
     getState: () ->
       # If the state is cached then return it
       return if @_state? then Promise.resolve(@_state)
-      # else et the state from somwhere
+      # else set the state from somewhere
       return @getStatus(@relayName).then( (state) =>
         @_state = state
         # and return it.

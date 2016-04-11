@@ -15,7 +15,7 @@ interval` specifies the time interval in seconds for polling the state informati
     }
     
 Then you need to add a Yoctopuce MaxiPowerRelay device in the `devices` section. 
-Similiar like other device in Pimatic, you have to describe for below properties
+Similar like other device in Pimatic, you have to describe for below properties
 
     {
       "id": "YoctoPowerRelay-Lampu_depan",
