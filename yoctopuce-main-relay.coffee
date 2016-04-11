@@ -96,7 +96,7 @@ module.exports = (env) ->
     getState: () ->
       # If the state is cached then return it
       return if @_state? then Promise.resolve(@_state)
-      # else et the state from somewhere
+      # else set the state from somewhere
       return @getStatus(@relayName).then( (state) =>
         @_state = state
         # and return it.
