@@ -21,7 +21,7 @@
     "yoctolib": "1.10.*"
   },
   "peerDependencies": {
-    "pimatic": "0.8.*"
+    "pimatic": ">=0.8.0 <1.0.0"
   },
   "engines": {
     "node": ">0.8.x",
@@ -41,5 +41,5 @@
     "relay",
     "home automation"
   ],
-  "license": "GPL"
+  "license": "GPL-2.0"
 }
